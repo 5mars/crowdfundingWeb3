@@ -1,15 +1,12 @@
-
-
 import React, { useContext, createContext } from 'react';
 
 import { useAddress, useContract, useMetamask, useContractWrite } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
-import { EditionMetadataWithOwnerOutputSchema } from '@thirdweb-dev/sdk';
 
 const StateContext = createContext();
 
+//----- state context provider ----- 
 export const StateContextProvider = ({ children }) => {
-
     const { contract } = useContract('0x05d6F1A3D85F00A82B28d38C1b57C0df2c6e6170');
     const { mutateAsync: CreateCampaign } = useContractWrite(contract, 'CreateCampaign');
 
@@ -33,6 +30,7 @@ export const StateContextProvider = ({ children }) => {
     }
 }
 
+//----- get campaigns func -----
 const getCampaigns = async () => {
     const campaigns = await contract.call('getCampaigns');
 
@@ -50,6 +48,7 @@ const getCampaigns = async () => {
     return parsedCampaings;
 }
 
+// ----- get user campaigns -----
 const getUserCampaigns = async () => {
     const allCampaigns = await getCampaigns();
 
@@ -58,12 +57,15 @@ const getUserCampaigns = async () => {
     return filteredCampaigns;
 }
 
+
+// ----- donate func -----
 const donate = async (pId, amount) => {
     const data = await contract.call('donateToCampaign', pId, {value: ethers.utils.parseEther(amount)});
 
     return data;
 }
 
+// ------ get donations -----
 const getDonations = async (pId) => {
     const donations = await contract.call('getDonators', pId);
     const numberOfDonations = donations[0].length;
@@ -76,11 +78,10 @@ const getDonations = async (pId) => {
         donation: ethers.utils.formatEther(donations[1][i].toString())
     })
     }
-
     return parsedDonations;
 }
 
-
+//----- return of state context provider -----
 return (
     <StateContext.Provider
     value={{ 
