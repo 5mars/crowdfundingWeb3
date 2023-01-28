@@ -1,29 +1,31 @@
 import React, {useState} from 'react'
 import { useNavigate } from 'react-router-dom'
 import { ethers } from "ethers"
+import Select from 'react-select'
 
 import { useStateContext } from '../context'
 import { money } from "../assets"
 import { CustomButton, FormField, Loader } from '../components'
 import { checkIfImage } from "../utils"
-import { loader } from "../assets"
 
 const CreateCampaign = () => {
   const navigate = useNavigate();
   const [isLoading, setIsLoading] = useState(false);
-  const {CreateCampaign}  = useStateContext();
+  const {CreateCampaign, selectOptions}  = useStateContext();
   const [form, setForm] = useState({
     name: "",
     title: "",
     description: "",
     target: "",
     deadline: "",
-    image: ""
+    image: "",
+    tag: ""
   })
 
   const handleFormFieldChange = (fieldName, e) => {
     setForm({... form, [fieldName]: e.target.value })
   }
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -101,6 +103,16 @@ const CreateCampaign = () => {
           value={form.image}
           handleChange={(e) => handleFormFieldChange("image", e)}
           />
+
+{/* couldn't do a tag <select> to made a text input instead */}
+          {/* <FormField
+          labelName="Tag *"
+          placeholder="Please enter a tag (i.e.: Education, School, etc...)"
+          inputType="text"
+          value={form.tag}
+          maxlength="12"
+          handleChange={(e) => handleFormFieldChange("tag", e)}
+          /> */}
 
         <div className="flex justify-center items-center mt-[40px] ">
           <CustomButton

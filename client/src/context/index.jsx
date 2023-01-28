@@ -80,6 +80,16 @@ const getDonations = async (pId) => {
     }
     return parsedDonations;
 }
+//for the drropdown select menu - createCamapaign - not used for now 
+const selectOptions = [
+    {value: "education", label: "Education"},
+    {value: "personnal", label: "Personnal"},
+    {value: "hobby", label: "Hobby"},
+    {value: "health", label: "Health"},
+    {value: "school", label: "School"},
+    {value: "religion", label: "Religion"},
+    {value: "other", label: "Other"},
+]
 
 //----- return of state context provider -----
 return (
@@ -92,7 +102,8 @@ return (
         getCampaigns,
         getUserCampaigns,
         donate,
-        getDonations
+        getDonations,
+        selectOptions
     }}
     >
     {children}

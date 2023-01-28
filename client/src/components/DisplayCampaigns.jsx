@@ -22,8 +22,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
                     <p className="font-epilogue font-semibold text-[14px] leading-[30px] text-[#818183]">You have not created any campaigns yet</p>
                 )}
             {/* display the campaigns if length greater than 0 */}
-                {!isLoading && campaigns.length > 0 && campaigns.map((campaign) => <FundCard 
-                key={campaign.id}
+                {!isLoading && campaigns.length > 0 && campaigns.map((campaign) => <FundCard key={campaign.id}
                 {...campaign}
                 handleClick={() => handleNavigate(campaign)}
                 />)}
