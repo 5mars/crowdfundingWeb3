@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
-import { logo, sun } from "../assets"
+import { logo, sun, third } from "../assets"
 import { navlinks } from "../constants"
 
 //const Icons to be used in the sidebar 

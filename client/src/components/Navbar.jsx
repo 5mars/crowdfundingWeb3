@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import { Link, useNavigate } from 'react-router-dom'
 
 import { useStateContext } from '../context'
@@ -11,26 +11,25 @@ const Navbar = () => {
   const [isActive, setIsActive] = useState("dashboard")
   const [toggleDrawer, setToggleDrawer] = useState(false)
 
-  const { connect, address, getCampaigns } = useStateContext();
-
-  //states for functionnal search bar
+  const [campaigns, setCampaigns] = useState([])
   const [searchText, setSearchText] = useState("")
   const [searchTimeout, setSearchTimeout] = useState(null)
   const [searchedResults, setSearchedResults] = useState(null)
-  const [campaigns, setCampaigns] = useState([])
 
-  //handle search functions
-  const handleSearch = (e) => {
-    clearTimeout(searchTimeout);
-    setSearchText(e.target.value);
-
-    setSearchTimeout(
-      setTimeout(() => {
-
-      }, 500)
-    )
+  const { connect, address, getCampaigns, contract } = useStateContext();
+  
+  //async function bc we can't call getCampaigns in useEffect since it needs to await. So we create an async function for it.
+  const fetchCampaigns = async () => {
+    const data = await getCampaigns();
+    setCampaigns(data);
   }
 
+  useEffect(() => {
+  if(contract) fetchCampaigns();
+}, [address, contract])
+
+
+console.log(campaigns)
   return (
     <div className="flex md:flex-row flex-col-reverse justify-between mb-[35px] gap-6">
       <div className="lg:flex-1 flex flex-row max-w-[458px] py-2 pl-4 pr-2 h-[52px] bg-[#1c1c24] rounded-[100px] ">
