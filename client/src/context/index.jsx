@@ -1,4 +1,4 @@
-import React, { useContext, createContext } from 'react';
+import React, { useContext, createContext, useState } from 'react';
 
 import { useAddress, useContract, useMetamask, useContractWrite } from '@thirdweb-dev/react';
 import { ethers } from 'ethers';
@@ -91,6 +91,9 @@ const selectOptions = [
     {value: "other", label: "Other"},
 ]
 
+const [lightMode, setLightMode] = useState(false);
+
+
 //----- return of state context provider -----
 return (
     <StateContext.Provider
@@ -103,7 +106,9 @@ return (
         getUserCampaigns,
         donate,
         getDonations,
-        selectOptions
+        selectOptions,
+        lightMode,
+        setLightMode
     }}
     >
     {children}

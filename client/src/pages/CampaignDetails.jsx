@@ -12,7 +12,7 @@ const CampaignDetails = () => {
   //gets us the campaign object depending on where we are
   const { state } = useLocation();
   const navigate = useNavigate();
-  const { donate, getDonations, contract, address } = useStateContext();
+  const { donate, getDonations, contract, address, lightMode } = useStateContext();
 
   const [isLoading, setIsLoading] = useState(false);
   const [amount, setAmount] = useState("")
@@ -42,7 +42,7 @@ const CampaignDetails = () => {
       <div className="w-full flex md:flex-row flex-col mt-10 gap-[30px]">
         <div className="flex-1 flex-col">
           <img src={state.image} alt="banner" className="w-full h-[410px] object-cover rounded-xl"/>
-          <div className="relative w-full h-[5px] bg-[#3a3a43] mt-2">
+          <div className={`relative w-full h-[5px] ${lightMode ? "bg-[#BEBEC6]" : "bg-[#3a3a43]"} mt-2`}>
             {/* ---- Percentage bar div (see utils for how it works) ---- */}
             <div className="absolute h-full bg-[#4acd8d]"
             style={{ width: `${calculateBarPercentage(state.target, state.amountCollected)}%`, maxWidth: "100%"}}></div>
@@ -60,27 +60,27 @@ const CampaignDetails = () => {
         <div className="flex-[2] flex flex-col gap-[40px]">
 {/* ----- CREATOR SECTION ----- */}
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Creator</h4>
+            <h4 className={`font-epilogue font-semibold text-[18px] ${lightMode ? "text-black" : "text-white"} uppercase`}>Creator</h4>
             <div className="mt-[20px] flex flex-row items-center flex-wrap gap-[14px]">
               <div className="w-[52px] h-[52px] flex items-center justify-center rounded-full cursor-pointer bg-[#2c2f32]">
                 <img src={thirdweb} alt="user" className="w-[60%] h-[60%] object-contain"/>
               </div>
               <div>
-                <h4 className='font-epilogue font-semibold text-[14px] text-white break-all'>{state.owner}</h4>
+                <h4 className={`font-epilogue font-semibold text-[14px] ${lightMode ? "text-black" : "text-white"} break-all`}>{state.owner}</h4>
                 <p className='mt-[4px] font-epilogue font-normal text-[#808191]'>10 Campaigns</p>
               </div>
             </div>
           </div>
 {/* ----- STORY SECTION ----- */}
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Story</h4>
+            <h4 className={`font-epilogue font-semibold text-[18px] ${lightMode ? "text-black" : "text-white"} uppercase`}>Story</h4>
             <div className='mt-[20px]'>
               <p className='font-epilogue font-normal text-[#808191] text-[16px] leading-[26px] text-justify'>{state.description}</p>
             </div>
           </div>
 {/* ----- DONATORS SECTION ----- */}
           <div>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Donators</h4>
+            <h4 className={`font-epilogue font-semibold text-[18px] ${lightMode ? "text-black" : "text-white"} uppercase`}>Donators</h4>
             <div className='mt-[20px] flex flex-col gap-4'>
             {donators.length > 0 ? donators.map((item, index) => (
               <div key={`${item.donator}-${index}`} className="flex justify-between items-center gap-4">
@@ -99,8 +99,8 @@ const CampaignDetails = () => {
         </div>
 {/* ----- STORY SECTION ----- */}
           <div className='flex-1'>
-            <h4 className="font-epilogue font-semibold text-[18px] text-white uppercase">Fund</h4>
-            <div className='mt-[20px] flex flex-col p-4 bg-[#1c1c24] rounded-[10px]'>
+            <h4 className={`font-epilogue font-semibold text-[18px] ${lightMode ? "text-black" : "text-white"} uppercase`}>Fund</h4>
+            <div className={`mt-[20px] flex flex-col p-4 ${lightMode ? "bg-[#D3D3D9]" : "bg-[#1c1c24]"} rounded-[10px]`}>
               <p className='font-epilogue font-medium text-[20px] leading-[30px] text-[#808191] text-center'>Fund the campaign
               </p>
 {/* Input div */}
@@ -109,13 +109,13 @@ const CampaignDetails = () => {
                 type="number"
                 placeholder="ETH 0.1"
                 step="0.01"
-                className="w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue text-white text-[18px] leading-[30px] placeholder:text-[#4b5264] rounded-[10px]"
+                className={`w-full py-[10px] sm:px-[20px] px-[15px] outline-none border-[1px] border-[#3a3a43] bg-transparent font-epilogue ${lightMode ? "text-black" : "text-white"} text-[18px] leading-[30px] placeholder:text-[#4b5264] rounded-[10px]`}
                 value={amount}
                 onChange={(e) => setAmount(e.target.value)}
                 />
 {/* Motivational banner div */}
-                <div className='my-[20px] p-4 bg-[#13131a] rounded-lg'>
-                  <h4 className="font-epilogue font-semibold text-[14px] leading-[22px] text-white">Back it because you believe in it</h4>
+                <div className={`my-[20px] p-4 ${lightMode ? "bg-[#E7E7EE]" : "bg-[#13131a]"} rounded-lg`}>
+                  <h4 className={`font-epilogue font-semibold text-[14px] leading-[22px] ${lightMode ? "text-black" : "text-white"}`}>Back it because you believe in it</h4>
                   <p className='mt-[20px] font-epilogue font-normal leading-[22px] text-[#808191]'>Support the project for no reward, just because it speaks to you.</p>
                 </div>
 {/* Custom Funding Button */}

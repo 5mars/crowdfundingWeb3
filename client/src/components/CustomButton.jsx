@@ -1,6 +1,8 @@
 import React from 'react'
+import { useStateContext } from '../context'
 
 const CustomButton = ({ btnType, title, handleClick, styles }) => {
+  const {lightMode} = useStateContext();
   return (
     <button
     type={btnType}

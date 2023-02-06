@@ -1,12 +1,14 @@
 import React from 'react'
 import { Route, Routes } from "react-router-dom"
+import { useStateContext } from './context'
 
 import { CampaignDetails, CreateCampaign, Home, Profile, Payment, Withdraw} from "./pages"
 import { Sidebar, Navbar } from './components'
 
 const App = () => {
+    const { lightMode } = useStateContext();
   return (
-    <div className="relative sm:-8 p-4 bg-[#13131a] min-h-screen flex flex-row">
+    <div className={`relative sm:-8 p-4 ${lightMode === true ? "bg-[#E7E7EE]" : "bg-[#13131a]"} min-h-screen flex flex-row`}>
       <div className="sm:flex hidden mr-10 relative">
         <Sidebar/>
       </div>

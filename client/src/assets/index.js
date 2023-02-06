@@ -14,6 +14,7 @@ import loader from './loader.svg';
 import thirdweb from './thirdweb.png';
 import gear from "./gear.svg"
 import third from "./third.svg"
+import moon from "./moon.svg"
 
 export {
   tagType,
@@ -32,4 +33,5 @@ export {
   thirdweb,
   gear,
   third,
+  moon
 };

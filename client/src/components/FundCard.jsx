@@ -2,13 +2,16 @@ import React from 'react'
 
 import { tagType, thirdweb } from "../assets"
 import { daysLeft } from "../utils"
+import { useStateContext } from '../context'
+
 
 const FundCard = ({ owner, title, description, target, deadline, amountCollected, image, handleClick, tag }) => {
 
     const remainingDays = daysLeft(deadline);
+    const { lightMode } = useStateContext();
 
     return (
-        <div className="sm:w-[288px] w-full rounded-[15px] bg-[#1c1c24] cursor-pointer" onClick={handleClick}>
+        <div className={`sm:w-[288px] w-full rounded-[15px] ${lightMode ? "bg-[#D3D3D9]" : "bg-[#1c1c24]"} cursor-pointer`} onClick={handleClick}>
             <img src={image} alt="fund" className="w-full h-[158px] object-cover rounded-[15px]"/>
 
 {/* tried to create a tag props but smart contract isnt upgradable...and didn't add the tag props on deployment so it's a bit useless (until i find a solution) */}
@@ -20,18 +23,18 @@ const FundCard = ({ owner, title, description, target, deadline, amountCollected
                 </div>
 
                 <div className="block">
-                    <h3 className="font-epilogue font-semibold text-[16px] text-white text-left leading-[26px] truncate">{title}</h3>
+                    <h3 className={`font-epilogue font-semibold text-[16px] ${lightMode ? "text-black" : "text-white"} text-left leading-[26px] truncate`}>{title}</h3>
                     <p className="mt-[5px] font-epilogue font-normal text-[#808191] text-left leading-[18px] truncate">{description}</p>
                 </div>
 
                 <div className="flex justify-between flex-wrap mt-[15px] gap-2">
                     <div className="flex flex-col">
-                        <h4 className="font-epilogue font-semibold text-[14px] text-[#b2b3bd] leading-[22px]">{amountCollected}</h4>
+                        <h4 className={`font-epilogue font-semibold text-[14px] ${lightMode ? "text-[#4B4C58]" : "text-[#b2b3bd]"} leading-[22px]`}>{amountCollected}</h4>
                         <p className="mt-[3px] font-epilogue font-normal text-[12px] leading-[18px] text-[#808191] sm:max-w-[120px] truncate">Raised of {target}</p>
                     </div>
 
                     <div className="flex flex-col">
-                        <h4 className="font-epilogue font-semibold text-[14px] text-[#b2b3bd] leading-[22px]">{remainingDays}</h4>
+                        <h4 className={`font-epilogue font-semibold text-[14px] ${lightMode ? "text-[#4B4C58]" : "text-[#b2b3bd]"} leading-[22px]`}>{remainingDays}</h4>
                         <p className="mt-[3px] font-epilogue font-normal text-[12px] leading-[18px] text-[#808191] sm:max-w-[120px] truncate">Days Left</p>
                     </div>
                 </div>
@@ -40,7 +43,7 @@ const FundCard = ({ owner, title, description, target, deadline, amountCollected
                         <div className="w-[30px] h-[30px] rounded-full flex justify-center items-center bg-[#13131a]">
                             <img src={thirdweb} alt="user" className='w-1/2 h-1/2 object-contain'/>
                         </div>
-                    <p className="flex-1 font-epilogue font-normal text-[12px] text-[#808191] truncate">by <span className="text-[#b2bdb3]">{owner}</span></p>
+                    <p className={`flex-1 font-epilogue font-normal text-[12px] text-[#808191] truncate`}>by <span className={`${lightMode ? "text-[#4B584C]" : "text-[#b2bdb3]"}`}>{owner}</span></p>
                     </div>
             </div>
         </div>

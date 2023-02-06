@@ -6,7 +6,7 @@ import { useStateContext } from '../context'
 
 const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
     const navigate = useNavigate();
-    const { address } = useStateContext();
+    const { address, lightMode } = useStateContext();
 
     const handleNavigate = (campaign) => {
         navigate(`/campaign-details/${campaign.title}`, { state: campaign })
@@ -15,7 +15,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
 
     return (
         <div>
-            <h1 className="font-epilogue font-semibold text-[18px] text-white text-left">{title} ({campaigns.length})</h1>
+            <h1 className={`font-epilogue font-semibold text-[18px] ${lightMode ? "text-black" : "text-white"} text-left`}>{title} ({campaigns.length})</h1>
             {console.log(address)}
             <div className="flex flex-wrap mt-[20px] gap-[26px]">
             {/* loading screen if isLoading === true */}
