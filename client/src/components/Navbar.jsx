@@ -48,7 +48,7 @@ const Navbar = () => {
         <input 
         type="text" 
         placeholder="Search for campaigns" 
-        className={`flex w-full font-epilogue font-normal text-[14px] ${ lightMode === true ? "placeholder:text-[#A2A8B9] text-black" : "placeholder:text-[#4b5264] text-white"} bg-transparent outline-none`}
+        className={`flex w-full font-rubik font-normal text-[14px] ${ lightMode === true ? "placeholder:text-[#A2A8B9] text-black" : "placeholder:text-[#4b5264] text-white"} bg-transparent outline-none`}
         onChange={() => setSearchText(e.target.value)}
         />
         
@@ -105,7 +105,7 @@ const Navbar = () => {
                   }}
                   >
                     <img src={link.imgUrl} alt={link.name} className={`w-[24px] h-[24px] object-contain ${isActive === link.name ? "grayscale-0" : 'grayscale'}`}/>
-                    <p className={`ml-[20px] font-epilogue font-semibold text-[14px] ${isActive === link.name ? "text-[#1dc071]" : "text-[#808191]"}`}>
+                    <p className={`ml-[20px] font-rubik font-semibold text-[14px] ${isActive === link.name ? "text-[#1dc071]" : "text-[#808191]"}`}>
                       {link.name}
                     </p>
                   </li>

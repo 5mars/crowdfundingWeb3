@@ -15,7 +15,7 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
 
     return (
         <div>
-            <h1 className={`font-epilogue font-semibold text-[18px] ${lightMode ? "text-black" : "text-white"} text-left`}>{title} ({campaigns.length})</h1>
+            <h1 className={`font-rubik font-semibold text-[18px] ${lightMode ? "text-black" : "text-white"} text-left`}>{title} ({campaigns.length})</h1>
 
             <div className="flex flex-wrap mt-[20px] gap-[26px]">
             {/* loading screen if isLoading === true */}
@@ -24,11 +24,11 @@ const DisplayCampaigns = ({ title, isLoading, campaigns }) => {
                 )}
             {/* If we have no campaigns : display a message */}
                 {address && !isLoading && campaigns.length === 0 && (
-                    <p className="font-epilogue font-semibold text-[14px] leading-[30px] text-[#818183]">You have not created any campaigns yet</p>
+                    <p className="font-rubik font-semibold text-[14px] leading-[30px] text-[#818183]">You have not created any campaigns yet</p>
                 )}
 
             {!address && !isLoading && campaigns.length === 0 && (
-                <p className="font-epilogue font-semibold text-[14px] leading-[30px] text-[#818183]">Please connect your Metamask Wallet in order to see your campaigns</p>
+                <p className="font-rubik font-semibold text-[14px] leading-[30px] text-[#818183]">Please connect your Metamask Wallet in order to see your campaigns</p>
             )}
             {/* display the campaigns if length greater than 0 */}
                 {!isLoading && campaigns.length > 0 && campaigns.map((campaign) => <FundCard key={campaign.id}
